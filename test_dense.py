@@ -8,7 +8,7 @@ from utils.dataset import PolynomialDataset
 from utils.visualize import vis_table, save_json
 from utils.util import getSaveFileName, getDevice
 from models.networks import DenseNet
-from models.train import trainModel, testModel, saveModel
+from models.train import testModel, saveModel, Trainer
 
 # 检查 GPU 是否可用
 device = getDevice()
@@ -16,14 +16,15 @@ print("The device U can Use is: ", device)
 
 # 准备数据
 # TODO: 训练三次多项式，精度改进方向：网络结构调整+训练数据和迭代次数增加
-train_dataset = PolynomialDataset(num_points = 30000, method = 'common', ptimes = 5)
+train_dataset = PolynomialDataset(num_points = 10000, method = 'common', ptimes = 5)
 train_loader = DataLoader(train_dataset, batch_size=10, shuffle=True)
 
 # 定义模型
 model = DenseNet(activate = 'LeakyReLU').to(device)
 
-# 训练模型
-trainModel(train_loader, model, device, num_epochs = 20000, criter = 'MSE', lr=0.0001)
+# 创建Trainer实例
+trainer = Trainer(model, train_loader, lr = 0.0001, criter = 'MSE', checkpoint_dir = './res/checkpoint/', model_type = 'Dense')
+trainer.train(num_epochs = 8000, save_interval = 100)
 file_name = getSaveFileName(model_name = 'Dense', path = './res/')
 saveModel(model, file_name)
 

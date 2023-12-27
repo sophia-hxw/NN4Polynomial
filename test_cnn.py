@@ -10,7 +10,7 @@ from utils.dataset import PolynomialDataset
 from utils.visualize import vis_table, save_json
 from utils.util import getSaveFileName, getDevice
 from models.networks import PolynomialCNN
-from models.train import trainModel, testModel, saveModel, Trainer
+from models.train import testModel, saveModel, Trainer
 
 # TODO: GPU上的训练
 # TODO: 模型加深 or 加宽
@@ -28,9 +28,7 @@ model = PolynomialCNN(activate = 'LeakyReLU').to(device)
 
 # 创建Trainer实例
 trainer = Trainer(model, train_loader, lr = 0.01, criter = 'MSE', checkpoint_dir = './res/checkpoint/', model_type = 'CNN')
-# trainModel(train_loader, model, device, num_epochs = 6000, criter = 'MSE', model_type = 'CNN')
-# 开始训练，如果存在checkpoint则进行断点续训
-trainer.train(num_epochs = 6000, save_interval=100)
+trainer.train(num_epochs = 6000, save_interval = 100 )
 file_name = getSaveFileName(model_name = 'CNN', path = './res/')
 saveModel(model, file_name)
 
