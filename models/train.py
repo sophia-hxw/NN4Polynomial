@@ -125,7 +125,7 @@ class Trainer:
                 loss.backward()
                 self.optimizer.step()
             
-            if (epoch + 1) % 5 == 0:
+            if (epoch + 1) % 200 == 0:
                 print(f'Epoch [{epoch+1}/{num_epochs}], Loss: {loss.item()}')
 
             # 保存checkpoint

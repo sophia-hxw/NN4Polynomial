@@ -7,25 +7,26 @@ from utils.dataset import PolynomialDataset
 from utils.visualize import vis_table, save_json
 from utils.util import getSaveFileName, getDevice
 from models.networks import FCNModel
-from models.train import trainModel, testModel, saveModel
+from models.train import testModel, saveModel, Trainer
 
-# TODO: 网络测试
-# 检查 GPU 是否可用
+# TODO: 网络测试 【完成，结论：可用】
+# TODO: 检查 GPU 是否可用
 device = getDevice()
 print("The device U can Use is: ", device)
 
 # 准备数据
-train_dataset = PolynomialDataset(num_points = 20000, method = 'common', ptimes = 4)
-train_loader = DataLoader(train_dataset, batch_size = 5, shuffle=True)
+train_dataset = PolynomialDataset(num_points = 60000, method = 'common', ptimes = 4)
+train_loader = DataLoader(train_dataset, batch_size = 50, shuffle=True)
 
 # 定义超参数
 input_dim = 1
-hidden_dims = [64, 128, 256, 128, 64]  # 可根据需要调整隐藏层的维度和层数
+hidden_dims = [32, 64, 128, 256, 256, 128, 64, 32]  # 可根据需要调整隐藏层的维度和层数
 output_dim = 1
 model = FCNModel(input_dim, hidden_dims, output_dim)
 
-# 训练模型
-trainModel(train_loader, model, device, num_epochs = 10000, criter = 'MSE', lr=0.00005, model_type = 'fcn')
+# 创建Trainer实例
+trainer = Trainer(model, train_loader, lr = 0.0004, criter = 'MSE', checkpoint_dir = './res/checkpoint/', model_type = 'FCN')
+trainer.train(num_epochs = 40000, save_interval = 5000 )
 file_name = getSaveFileName(model_name = 'FCN', path = './res/')
 saveModel(model, file_name)
 
