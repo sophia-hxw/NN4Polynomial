@@ -25,7 +25,7 @@ train_loader = DataLoader(train_dataset, batch_size = 20, shuffle=True)
 
 # 定义超参数
 input_dim = 1
-hidden_dims = [16, 32, 64, 128, 256, 512, 512, 256, 128, 64, 32, 16]  # 可根据需要调整隐藏层的维度和层数
+hidden_dims = [16, 32, 64, 128, 64, 32, 16]  # 可根据需要调整隐藏层的维度和层数
 output_dim = 1
 model = FCNModel(input_dim, hidden_dims, output_dim)
 
