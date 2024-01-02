@@ -130,4 +130,6 @@ dmypy.json
 
 # models
 res/
+res_polynomial/
+res_trigonometric/
 
