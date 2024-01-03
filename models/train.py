@@ -7,21 +7,26 @@ import sys
 sys.path.append("../")  # 添加project文件夹到sys.path
 from utils.util import find_max_epoch_file
 
-def getTestModel(file_name = './res/FCN_2024-01-03-00-11.pth'):
-    model = torch.load(file_name)
-
-    return model
-
-def testModel(test_loader, model, device = None, criter = 'MSE', model_type = None):
+def testModel(file_name = None, test_loader = None, model = None, device = None, criter = 'MSE', model_type = None):
+    if file_name:
+        model = torch.load(file_name)
+        print("Testing Exiting model. ")
+    else:
+        print("Testing model U have just trained.")
+    
     if criter == 'MSE':
         criterion = nn.MSELoss()
     else:
         print("Use defaule MSELoss")
         criterion = nn.MSELoss()
+    
+    if device:
+        self.model.to(device)
 
     model.eval()
     test_losses = []
     pred_y = []
+
     with torch.no_grad():
         for inputs, labels in test_loader:
             if model_type == 'cnn':
@@ -35,9 +40,6 @@ def testModel(test_loader, model, device = None, criter = 'MSE', model_type = No
     
     return pred_y, test_losses
 
-def saveModel(model, file_name = './res/Dense_2023-12-21-11-18'):
-    # 保存模型
-    torch.save(model, file_name + '.pth')
 
 class Trainer:
     def __init__(self, model, train_loader, lr=0.01, criter = 'MSE', checkpoint_dir = './cache/', model_type = None):
@@ -66,7 +68,7 @@ class Trainer:
         """
         os.makedirs(checkpoint_dir, exist_ok=True)
 
-    def train(self, num_epochs = 5000, save_interval = 1000, device = None):
+    def train(self, num_epochs = 5000, save_interval = 1000, file_name = None, device = None):
         # checkpoint_path = os.path.join(self.checkpoint_dir, 'checkpoint.pth')
         checkpoint_name = find_max_epoch_file(self.checkpoint_dir, search_string = self.model_type)
         print("checkpoint_name: ", checkpoint_name)
@@ -82,6 +84,9 @@ class Trainer:
         else:# None
             start_epoch = 0
             # best_loss = float('inf')
+
+        if device:
+            self.model.to(device)
 
         for epoch in range(start_epoch, start_epoch + num_epochs):
             # self.model.train()
@@ -110,3 +115,5 @@ class Trainer:
                     'optimizer_state_dict': self.optimizer.state_dict(),
                     'loss': loss,
                 }, save_checkpoint)
+
+        torch.save(self.model, file_name + '.pth')

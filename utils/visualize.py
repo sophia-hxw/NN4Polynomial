@@ -7,11 +7,11 @@ def writejson(file_name = 'test', data={'hello': 'world'}):
 
     print("Done JSON file written.")
 
-def readjson(file_name = './configs/params_fcn.json'):
+def get_params(file_name = './configs/params_fcn.json'):
     with open(file_name, 'r') as file:
-        hyperparameters = json.load(file)
+        params = json.load(file)
     
-    return hyperparameters
+    return params['data'], params['training'], params['model'], params['testing']
 
 def vis_table(test_dataset, pred_y, test_loss):
     # 设置列宽度

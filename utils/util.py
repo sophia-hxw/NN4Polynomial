@@ -22,8 +22,8 @@ def getDevice(model_type = None):
     else:
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     
-    return "cpu"
-    # return device
+    # return "cpu"
+    return device
 
 def find_max_epoch_file(folder_path = '.', search_string = ''):
     pth_files = [file for file in os.listdir(folder_path) if file.endswith('.pth') and search_string in file]
@@ -44,3 +44,5 @@ def find_max_epoch_file(folder_path = '.', search_string = ''):
                 max_pth_file = pth_file
 
     return max_pth_file
+
+
