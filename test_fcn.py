@@ -3,7 +3,7 @@ activation: 'ReLU', 'LeakyReLU', 'Tanh', 'Sigmoid', 'Mish'
 lossfunction: 'MSE', 'CrossEntropy', 'L1'
 """
 from torch.utils.data import DataLoader
-from utils.dataset import PolynomialDataset, CustomDataset
+from utils.dataset import CustomDataset
 from utils.visualize import vis_table, save_json, readjson
 from utils.util import getSaveFileName, getDevice
 from models.networks import FCNModel
@@ -14,10 +14,6 @@ from models.train import testModel, saveModel, Trainer
 device = getDevice()
 print("The device U can Use is: ", device)
 
-# 准备数据
-# 生成二次多项式数据
-# train_dataset = CustomDataset(num_points=1000, function_type='polynomial', generate_type = 'general', degree=2, scale = 10, a=1)
-# train_loader = DataLoader(train_dataset, batch_size = 50, shuffle=True)
 params = readjson('./configs/params_fcn.json')
 dtparams = params['data']
 traparams = params['training']

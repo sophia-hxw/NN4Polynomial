@@ -1,9 +1,9 @@
 import torch.nn as nn
 
 # 定义cnn网络
-class PolynomialCNN(nn.Module):
+class CNN(nn.Module):
     def __init__(self, activate = 'LeakyReLU'):
-        super(PolynomialCNN, self).__init__()
+        super(CNN, self).__init__()
         if activate == 'LeakyReLU':
             self.relu = nn.LeakyReLU()
         elif activate == 'Tanh':
@@ -162,6 +162,18 @@ class ResNet(nn.Module):
 class FCNModel(nn.Module):
     def __init__(self, input_dim, hidden_dims, output_dim):
         super(FCNModel, self).__init__()
+        if activate == 'LeakyReLU':
+            self.relu = nn.LeakyReLU()
+        elif activate == 'Tanh':
+            self.relu = nn.Tanh()
+        elif activate == 'Sigmoid':
+            self.relu = nn.Sigmoid()
+        elif activate == 'Mish':
+            self.relu = nn.Mish()
+        else:
+            print("Default activation is ReLU")
+            self.relu = nn.ReLU()
+        
         layers = []
         in_dim = input_dim
         for h_dim in hidden_dims:

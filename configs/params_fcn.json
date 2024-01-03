@@ -2,7 +2,7 @@
   "data":{
     "num_points": 20000,
     "function_type": "trigonometric",
-    "tri_function": "cos",
+    "tri_function": "tan",
     "tri_k": 1,
     "data_type": "general",
     "data_scale": 10,

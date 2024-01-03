@@ -7,38 +7,6 @@ import sys
 sys.path.append("../")  # 添加project文件夹到sys.path
 from utils.util import find_max_epoch_file
 
-def trainModel(train_loader, model, device = None, num_epochs = 1000, criter = 'MSE', lr=0.01, model_type = None):
-    ### train model
-    if criter == 'MSE':
-        criterion = nn.MSELoss()
-    elif criter == 'CrossEntropy':
-        criterion = nn.CrossEntropyLoss()
-    elif criter == 'L1':
-        criterion = nn.L1Loss()
-    else:
-        print("Use defaule MSELoss")
-        criterion = nn.MSELoss()
-
-    optimizer = optim.Adam(model.parameters(), lr)
-    for epoch in range(num_epochs):
-        for inputs, labels in train_loader:
-            if model_type == 'cnn':
-                labels = labels.unsqueeze(2)
-            if device:
-                inputs, labels = inputs.to(device), labels.to(device)
-            
-            # 前向传播
-            outputs = model(inputs)
-            loss = criterion(outputs, labels)
-            
-            # 反向传播和优化
-            optimizer.zero_grad()# 把梯度置零，也就是把loss关于weight的导数变成0
-            loss.backward()
-            optimizer.step()
-
-        if (epoch + 1) % 100 == 0:
-            print(f'Epoch [{epoch+1}/{num_epochs}], Loss: {loss.item()}')
-
 def getTestModel(file_name = './res/FCN_2024-01-03-00-11.pth'):
     model = torch.load(file_name)
 
