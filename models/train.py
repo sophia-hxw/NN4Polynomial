@@ -39,6 +39,11 @@ def trainModel(train_loader, model, device = None, num_epochs = 1000, criter = '
         if (epoch + 1) % 100 == 0:
             print(f'Epoch [{epoch+1}/{num_epochs}], Loss: {loss.item()}')
 
+def getTestModel(file_name = './res/FCN_2024-01-03-00-11.pth'):
+    model = torch.load(file_name)
+
+    return model
+
 def testModel(test_loader, model, device = None, criter = 'MSE', model_type = None):
     if criter == 'MSE':
         criterion = nn.MSELoss()

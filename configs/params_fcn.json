@@ -1,0 +1,32 @@
+{
+  "data":{
+    "num_points": 20000,
+    "function_type": "trigonometric",
+    "tri_function": "cos",
+    "tri_k": 1,
+    "data_type": "general",
+    "data_scale": 10,
+    "batch_size": 64
+  },
+  "training":{
+    "learning_rate": 0.001,
+    "criter": "MSE",
+    "num_epochs": 8000,
+    "save_interval": 1000,
+    "checkpoint": "./res/checkpoint/",
+    "res_dir": "./res/"
+  },
+  "model":{
+    "model_type": "FCN",
+    "input_dim": 1,
+    "hidden_dims": [16, 32, 64, 128, 256, 512, 512, 256, 128, 64, 32, 16],
+    "output_dim": 1
+  }, 
+  "testing":{
+    "num_points": 15,
+    "data_type": "random",
+    "data_scale": 10,
+    "seed": 42,
+    "batch_size": 1
+  }     
+}

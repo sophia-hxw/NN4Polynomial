@@ -7,7 +7,7 @@ def writejson(file_name = 'test', data={'hello': 'world'}):
 
     print("Done JSON file written.")
 
-def readjson(file_name = './models/params_fcn.json'):
+def readjson(file_name = './configs/params_fcn.json'):
     with open(file_name, 'r') as file:
         hyperparameters = json.load(file)
     
