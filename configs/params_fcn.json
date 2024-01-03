@@ -19,7 +19,7 @@
   "model":{
     "model_type": "FCN",
     "input_dim": 1,
-    "hidden_dims": [16, 32, 64, 128, 256, 512, 512, 256, 128, 64, 32, 16],
+    "hidden_dims": [16, 32, 64, 128, 64, 32, 16],
     "output_dim": 1
   }, 
   "testing":{

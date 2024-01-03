@@ -75,7 +75,7 @@ class CustomDataset(Dataset):
         self.polya = a #多项式最高次项系数
         self.degree = degree #多项式最高次项次数
         self.trik = k #三角函数系数
-        self.trifunc = tri_function
+        self.tri_function = tri_function
 
         # 随机或者一般法生成数据
         if self.data_type == 'general':
@@ -105,11 +105,11 @@ class CustomDataset(Dataset):
             self.x = x_val * self.data_scale
             self.x = torch.round(self.x, decimals=3) 
             # self.y = torch.sin(2 * 3.141592654 * self.trik * self.x)
-            if tri_function == 'sin':
+            if self.tri_function == 'sin':
                 self.y = torch.sin(self.trik * self.x)
-            elif tri_function == 'cos':
+            elif self.tri_function == 'cos':
                 self.y = torch.cos(self.trik * self.x)
-            elif tri_function == 'tan':
+            elif self.tri_function == 'tan':
                 self.y = torch.tan(self.trik * self.x)
             else:
                 raise ValueError("Invalid tri_function. Choose 'sin', 'cos' or 'tan'.")
