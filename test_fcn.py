@@ -24,8 +24,8 @@ tstparams = params['testing']
 # init(num_points = 100, function_type='polynomial', data_type = 'random', tri_function = 'sin', degree=2, scale = 10, a=1, k=1, seed=None)
 train_dataset = CustomDataset(dtparams['num_points'], dtparams['function_type'], dtparams['data_type'], dtparams['tri_function'], None, dtparams['data_scale'], None, dtparams['tri_k'], None)
 train_loader = DataLoader(train_dataset, batch_size = dtparams['batch_size'], shuffle = True)
-
-model = FCNModel(mdlparams['input_dim'], mdlparams['hidden_dims'], mdlparams['output_dim'])
+# init(input_dim, hidden_dims, output_dim, activation)
+model = FCNModel(mdlparams['input_dim'], mdlparams['hidden_dims'], mdlparams['output_dim'], mdlparams['activation'])
 
 # ****************************** TRAIN ****************************************
 # init(model, train_loader, lr=0.01, criter = 'MSE', checkpoint_dir = './cache/', model_type = None)
