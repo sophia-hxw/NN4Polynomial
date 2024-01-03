@@ -21,7 +21,7 @@ def testModel(file_name = None, test_loader = None, model = None, device = None,
         criterion = nn.MSELoss()
     
     if device:
-        self.model.to(device)
+        model.to(device)
 
     model.eval()
     test_losses = []
