@@ -23,7 +23,7 @@ def vis_table(test_dataset, pred_y, test_loss):
 
     # 打印数据
     for idx in range(len(test_dataset)):
-        print("| {:<{}} | {:<{}} | {:<{}} | {:<{}} |".format(round(test_dataset.x[idx].item(),4), print_width, round(test_dataset.y[idx].item(),4),  print_width, round(pred_y[idx],4),  print_width, round(test_loss[idx],4), print_width))
+        print("| {:<{}} | {:<{}} | {:<{}} | {:<{}} |".format(round(test_dataset.x[idx].item(),6), print_width, round(test_dataset.y[idx].item(),6),  print_width, round(pred_y[idx],6),  print_width, round(test_loss[idx],6), print_width))
 
 def save_json(file_name, test_dataset, pred_y, test_loss):
     datas = []

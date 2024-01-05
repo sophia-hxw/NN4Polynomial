@@ -6,4 +6,6 @@
 
 
 
-#
+# TODO list
+[ ] FCN网络测试
+[ ] FCN的GPU训练测试

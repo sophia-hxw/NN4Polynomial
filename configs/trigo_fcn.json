@@ -1,9 +1,9 @@
 {
     "data":{
       "num_points": 20001,
-      "function_type": "polynomial",
-      "tri_function": null,
-      "k": 2,
+      "function_type": "trigonometric",
+      "tri_function": "tan",
+      "k": 1,
       "data_type": "general",
       "data_scale": 10,
       "batch_size": 128,

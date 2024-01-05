@@ -9,13 +9,10 @@ from utils.util import getSaveFileName, getDevice
 from models.networks import FCNModel
 from models.train import testModel, Trainer
 
-# TODO: 网络测试 【完成，结论：可用】
-# TODO: 检查 GPU 是否可用【完成，结论：可用】
-# TODO: 检查数据集是否正确
 device = getDevice()
 print("The device U can Use is: ", device)
 
-dtparams, traparams, mdlparams, tstparams = get_params('./configs/params_fcn.json')
+dtparams, traparams, mdlparams, tstparams = get_params('./configs/trigo_fcn.json')
 
 # ****************************** DATA ****************************************
 # num_points=100, function_type='polynomial', data_type = 'random', tri_function = 'sin', data_scale = 10,  k=1, seed=None
@@ -29,7 +26,7 @@ test_dataset = CustomDataset(tstparams['num_points'], dtparams['function_type'],
 test_loader = DataLoader(test_dataset, tstparams['batch_size'], shuffle = False)
 
 # ****************************** MODEL ****************************************
-model = FCNModel(mdlparams['input_dim'], mdlparams['hidden_dims'], mdlparams['output_dim'], mdlparams['activation'])
+model = FCNModel(mdlparams['layer_dims'], mdlparams['activation'])
 
 # ****************************** TRAIN ****************************************
 file_name = getSaveFileName(mdlparams['model_type'], traparams['res_dir'])

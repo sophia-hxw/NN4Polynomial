@@ -160,8 +160,11 @@ class ResNet(nn.Module):
 
 # 定义FCN模型
 class FCNModel(nn.Module):
-    def __init__(self, input_dim, hidden_dims, output_dim, activate):
+    def __init__(self, layer_dims, activate):
         super(FCNModel, self).__init__()
+        input_dim = layer_dims[0]
+        output_dim = layer_dims[-1]
+        hidden_dims = layer_dims[1:-1]
         if activate == 'LeakyReLU':
             self.relu = nn.LeakyReLU()
         elif activate == 'Tanh':
