@@ -1,0 +1,49 @@
+{
+  "data":{
+    "@@@num_points": "训练数据点数量",
+    "num_points": 10003,
+    "@@@function_type": "数据生成函数，现有：trigonometric, polynomial",
+    "function_type": "trigonometric",
+    "@@@tri_function": "若数据生成函数为三角函数，需用此字段制定具体三角函数",
+    "tri_function": "tan",
+    "@@@k": "多项式次数中的最高次数，x^k，三角函数中的自变量系数sin(kx)",
+    "k": 1,
+    "@@@data_type": "数据生成方式，训练时按常理(如，均匀采样)生成general，测试时随机生成random",
+    "data_type": "general",
+    "@@@data_scale": "原自变量是在[-1,1]上采样，用此字段来缩放自变量",
+    "data_scale": 100,
+    "@@@batch_size": "训练的批次大小",
+    "batch_size": 8,
+    "@@@test_key": "测试用，暂无含义",
+    "test_key": null
+  },
+  "training":{
+    "@@@learning_rate": "模型训练学习率",
+    "learning_rate": 0.001,
+    "@@@criter":"loss计算方法",
+    "criter": "MSE",
+    "@@@num_epochs": "训练轮次",
+    "num_epochs": 3000,
+    "@@@save_interval": "保存checkpoint的训练轮次数",
+    "save_interval": 1000,
+    "@@@checkpoint": "checkpoint保存的路径",
+    "checkpoint": "./res/checkpoint/",
+    "": "",
+    "res_dir": "./res/"
+  },
+  "model":{
+    "model_type": "FCN",
+    "activation": "ReLU",
+    "use_checkpoint": 0, 
+    "input_dim": 1,
+    "hidden_dims": [64, 128, 256, 512, 1024, 256, 128, 64],
+    "output_dim": 1
+  }, 
+  "testing":{
+    "num_points": 20,
+    "data_type": "random",
+    "data_scale": 100,
+    "seed": 42,
+    "batch_size": 1
+  }     
+}

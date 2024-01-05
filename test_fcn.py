@@ -15,7 +15,7 @@ from models.train import testModel, Trainer
 device = getDevice()
 print("The device U can Use is: ", device)
 
-dtparams, traparams, mdlparams, tstparams = get_params('./configs/poly_fcn.json')
+dtparams, traparams, mdlparams, tstparams = get_params('./configs/params_fcn.json')
 
 # ****************************** DATA ****************************************
 # num_points=100, function_type='polynomial', data_type = 'random', tri_function = 'sin', data_scale = 10,  k=1, seed=None
@@ -33,8 +33,8 @@ model = FCNModel(mdlparams['input_dim'], mdlparams['hidden_dims'], mdlparams['ou
 
 # ****************************** TRAIN ****************************************
 file_name = getSaveFileName(mdlparams['model_type'], traparams['res_dir'])
-trainer = Trainer(model, train_loader, test_loader, traparams['learning_rate'], traparams['criter'], traparams['checkpoint'], mdlparams['model_type'])
-trainer.train(traparams['num_epochs'], traparams['save_interval'], file_name, device )
+trainer = Trainer(model, train_loader, test_loader, traparams['learning_rate'], traparams['criter'], traparams['res_dir']), mdlparams['model_type'])
+pred_y, test_loss = trainer.train(traparams['num_epochs'], traparams['save_interval'], file_name, device )
 
 # ****************************** VISUALIZATION ****************************************
 vis_table(test_dataset, pred_y, test_loss)

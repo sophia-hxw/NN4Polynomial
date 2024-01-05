@@ -131,7 +131,8 @@ class Trainer:
                 # testModel(None, self.test_loader, self.model, device, self.criter, self.model_type)
 
         torch.save(self.model, file_name + '.pth')
-        testModel(None, self.test_loader, self.model, device, self.criter, self.model_type)
+        pred_y, test_losses = testModel(None, self.test_loader, self.model, device, self.criter, self.model_type)
+        return pred_y, test_losses
 
 # TODO: (Tester) really need to coding?
 class Tester:
