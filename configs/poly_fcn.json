@@ -1,0 +1,35 @@
+{
+    "data":{
+      "num_points": 30001,
+      "function_type": "polynomial",
+      "tri_function": null,
+      "k": 2,
+      "data_type": "general",
+      "data_scale": 10,
+      "batch_size": 128,
+      "test_key": null
+    },
+    "training":{
+      "learning_rate": 0.001,
+      "criter": "MSE",
+      "num_epochs": 10000,
+      "save_interval": 5000,
+      "checkpoint": "./res/checkpoint/",
+      "res_dir": "./res/"
+    },
+    "model":{
+      "model_type": "FCN",
+      "activation": "ReLU",
+      "use_checkpoint": 0, 
+      "input_dim": 1,
+      "hidden_dims": [32, 64, 128, 256, 512, 1024],
+      "output_dim": 1
+    }, 
+    "testing":{
+      "num_points": 50,
+      "data_type": "random",
+      "data_scale": 10,
+      "seed": 31,
+      "batch_size": 1
+    }     
+  }

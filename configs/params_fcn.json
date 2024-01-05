@@ -3,7 +3,7 @@
     "num_points": 10003,
     "function_type": "trigonometric",
     "tri_function": "tan",
-    "tri_k": 1,
+    "k": 1,
     "data_type": "general",
     "data_scale": 100,
     "batch_size": 8,
@@ -20,6 +20,7 @@
   "model":{
     "model_type": "FCN",
     "activation": "ReLU",
+    "use_checkpoint": 0, 
     "input_dim": 1,
     "hidden_dims": [64, 128, 256, 512, 1024, 256, 128, 64],
     "output_dim": 1

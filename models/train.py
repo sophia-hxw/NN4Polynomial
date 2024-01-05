@@ -111,8 +111,8 @@ class Trainer:
             
             if (epoch + 1) % 200 == 0:
                 print(f'Epoch [{epoch+1}/{num_epochs}], Loss: {loss.item()}')
-                print(">>>>>>>>>>>>>>>>>> 200 epoch testing >>>>>>>>>>>>>>>>>>>")
-                testModel(None, self.test_loader, self.model, device, self.criter, self.model_type)
+                # print(">>>>>>>>>>>>>>>>>> 200 epoch testing >>>>>>>>>>>>>>>>>>>")
+                # testModel(None, self.test_loader, self.model, device, self.criter, self.model_type)
 
             # 保存checkpoint
             save_checkpoint = os.path.join(self.checkpoint_dir, self.model_type +'_'+str(epoch + 1)+'_'+'checkpoint.pth')
@@ -127,8 +127,8 @@ class Trainer:
                 # 测试checkpoint
                 # testModel(file_name = None, test_loader = None, model = None, device = None, criter = 'MSE', model_type = None)
                 # TODO: 验证此处模型文件file_name和模型model的测试结果是否相同
-                print(">>>>>>> checkpoint testing >>>>>>>")
-                testModel(None, self.test_loader, self.model, device, self.criter, self.model_type)
+                # print(">>>>>>> checkpoint testing >>>>>>>")
+                # testModel(None, self.test_loader, self.model, device, self.criter, self.model_type)
 
         torch.save(self.model, file_name + '.pth')
         testModel(None, self.test_loader, self.model, device, self.criter, self.model_type)
