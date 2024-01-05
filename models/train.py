@@ -126,7 +126,6 @@ class Trainer:
             
                 # 测试checkpoint
                 # testModel(file_name = None, test_loader = None, model = None, device = None, criter = 'MSE', model_type = None)
-                # TODO: 验证此处模型文件file_name和模型model的测试结果是否相同
                 # print(">>>>>>> checkpoint testing >>>>>>>")
                 # testModel(None, self.test_loader, self.model, device, self.criter, self.model_type)
 
@@ -134,7 +133,6 @@ class Trainer:
         pred_y, test_losses = testModel(None, self.test_loader, self.model, device, self.criter, self.model_type)
         return pred_y, test_losses
 
-# TODO: (Tester) really need to coding?
 class Tester:
     def __init__(test_loader = None, file_name = None, model = None):
         pass

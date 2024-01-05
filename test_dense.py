@@ -15,9 +15,6 @@ device = getDevice()
 print("The device U can Use is: ", device)
 
 # 准备数据
-# TODO: 训练三次多项式【完成，结论：可用】
-# TODO: 精度改进方向：网络结构调整
-# TODO: 训练数据和迭代次数增加
 train_dataset = PolynomialDataset(num_points = 10000, method = 'common', ptimes = 5)
 train_loader = DataLoader(train_dataset, batch_size=10, shuffle=True)
 

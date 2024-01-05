@@ -12,9 +12,6 @@ from utils.util import getSaveFileName, getDevice
 from models.networks import PolynomialCNN
 from models.train import testModel, saveModel, Trainer
 
-# TODO: GPU上的训练
-# TODO: 模型加深 or 加宽
-# 检查 GPU 是否可用
 device = getDevice(model_type = 'CNN')
 print("The device U can Use is: ", device)
 
