@@ -33,14 +33,16 @@ class CustomDataset(Dataset):
             raise ValueError("Invalid function_type. Choose 'general' or 'random'.")
 
     def data_generate(self, x_val):
+        self.x = x_val * self.data_scale
+        self.x = torch.round(self.x, decimals = 6) 
         if self.function_type == 'polynomial':
-            self.x = x_val * self.data_scale
-            self.x = torch.round(self.x, decimals=4) 
+            # self.x = x_val * self.data_scale
+            # self.x = torch.round(self.x, decimals=4) 
             self.y = self.polya * self.x ** self.degree
-            self.y = torch.round(self.y, decimals=4) 
+            self.y = torch.round(self.y, decimals = 6) 
         elif self.function_type == 'trigonometric':
-            self.x = x_val * self.data_scale
-            self.x = torch.round(self.x, decimals=4) 
+            # self.x = x_val * self.data_scale
+            # self.x = torch.round(self.x, decimals=4) 
             # self.y = torch.sin(2 * 3.141592654 * self.trik * self.x)
             if self.tri_function == 'sin':
                 self.y = torch.sin(self.trik * self.x)
@@ -50,7 +52,12 @@ class CustomDataset(Dataset):
                 self.y = torch.tan(self.trik * self.x)
             else:
                 raise ValueError("Invalid tri_function. Choose 'sin', 'cos' or 'tan'.")
-            self.y = torch.round(self.y, decimals=4) 
+            self.y = torch.round(self.y, decimals = 6) 
+        elif self.function_type == 'exponential':
+            pass
+            # self.y = self.x-self.x0
+            # self.y = -self.y.pow(2)/(2*self.k)
+            # self.y = torch.exp()
         else:
             raise ValueError("Invalid function_type. Choose 'polynomial' or 'trigonometric'.")
 

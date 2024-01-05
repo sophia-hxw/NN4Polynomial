@@ -35,6 +35,10 @@ def testModel(file_name = None, test_loader = None, model = None, device = None,
                 inputs, labels = inputs.to(device), labels.to(device)
             outputs = model(inputs)
             test_loss = criterion(outputs, labels)
+            print("******************** TESTING ********************")
+            print("test_x = ", inputs.item())
+            print("labels = ", labels.item())
+            print("prediction = ", outputs.item())
             test_losses.append(test_loss.item())
             pred_y.append(outputs.item())
     
@@ -42,8 +46,10 @@ def testModel(file_name = None, test_loader = None, model = None, device = None,
 
 
 class Trainer:
-    def __init__(self, model, train_loader, lr=0.01, criter = 'MSE', checkpoint_dir = './cache/', model_type = None):
+    def __init__(self, model, train_loader, test_loader = None, lr=0.01, criter = 'MSE', checkpoint_dir = './cache/', model_type = None):
         self.model = model
+        self.criter = criter
+        self.test_loader = test_loader
         if criter == 'MSE':
             self.criterion = nn.MSELoss()
         elif criter == 'CrossEntropy':
@@ -107,7 +113,7 @@ class Trainer:
                 print(f'Epoch [{epoch+1}/{num_epochs}], Loss: {loss.item()}')
 
             # 保存checkpoint
-            save_checkpoint = os.path.join(self.checkpoint_dir, self.model_type+'_'+str(epoch + 1)+'_'+'checkpoint.pth')
+            save_checkpoint = os.path.join(self.checkpoint_dir, self.model_type +'_'+str(epoch + 1)+'_'+'checkpoint.pth')
             if (epoch + 1) % save_interval == 0:
                 torch.save({
                     'epoch': epoch + 1,
@@ -115,5 +121,19 @@ class Trainer:
                     'optimizer_state_dict': self.optimizer.state_dict(),
                     'loss': loss,
                 }, save_checkpoint)
+            
+                # 测试checkpoint
+                # testModel(file_name = None, test_loader = None, model = None, device = None, criter = 'MSE', model_type = None)
+                # TODO: 验证此处模型文件file_name和模型model的测试结果是否相同
+                testModel(None, self.test_loader, self.model, device, self.criter, self.model_type)
 
         torch.save(self.model, file_name + '.pth')
+        testModel(None, self.test_loader, self.model, device, self.criter, self.model_type)
+
+# TODO: (Tester) really need to coding?
+class Tester:
+    def __init__(test_loader = None, file_name = None, model = None):
+        pass
+    
+    def test():
+        pass

@@ -1,17 +1,17 @@
 {
   "data":{
-    "num_points": 20000,
+    "num_points": 10003,
     "function_type": "trigonometric",
     "tri_function": "tan",
     "tri_k": 1,
     "data_type": "general",
-    "data_scale": 10,
-    "batch_size": 64
+    "data_scale": 100,
+    "batch_size": 8
   },
   "training":{
     "learning_rate": 0.001,
     "criter": "MSE",
-    "num_epochs": 8000,
+    "num_epochs": 3000,
     "save_interval": 1000,
     "checkpoint": "./res/checkpoint/",
     "res_dir": "./res/"
@@ -20,13 +20,13 @@
     "model_type": "FCN",
     "activation": "ReLU",
     "input_dim": 1,
-    "hidden_dims": [16, 32, 64, 128, 64, 32, 16],
+    "hidden_dims": [64, 128, 256, 512, 1024, 256, 128, 64],
     "output_dim": 1
   }, 
   "testing":{
-    "num_points": 15,
+    "num_points": 20,
     "data_type": "random",
-    "data_scale": 10,
+    "data_scale": 100,
     "seed": 42,
     "batch_size": 1
   }     

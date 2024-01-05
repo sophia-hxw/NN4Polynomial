@@ -18,22 +18,22 @@ def vis_table(test_dataset, pred_y, test_loss):
     print_width = 10
 
     # 打印表头
-    print("{:<{}} {:<{}} {:<{}} {:<{}}".format("test_x", print_width, "test_y", print_width, "pred_y", print_width, "MSELoss", print_width))
-    print("-" * (print_width  + print_width  + print_width + print_width))
+    print("| {:<{}} | {:<{}} | {:<{}} | {:<{}} |".format("test_x", print_width, "label_y", print_width, "pred_y", print_width, "MSELoss", print_width))
+    print("|" + " - |" * 4)
 
     # 打印数据
     for idx in range(len(test_dataset)):
-        print("{:<{}} {:<{}} {:<{}} {:<{}}".format(round(test_dataset.x[idx].item(),4), print_width, round(test_dataset.y[idx].item(),4),  print_width, round(pred_y[idx],4),  print_width, round(test_loss[idx],4), print_width))
+        print("| {:<{}} | {:<{}} | {:<{}} | {:<{}} |".format(round(test_dataset.x[idx].item(),4), print_width, round(test_dataset.y[idx].item(),4),  print_width, round(pred_y[idx],4),  print_width, round(test_loss[idx],4), print_width))
 
 def save_json(file_name, test_dataset, pred_y, test_loss):
     datas = []
 
     for idx in range(len(test_dataset)):
         oneres = {}
-        oneres["test_x"] = round(test_dataset.x[idx].item(),4)
-        oneres["test_y"] = round(test_dataset.y[idx].item(),4)
-        oneres["pred_y"] = round(pred_y[idx],4)
-        oneres["MSELoss"] = round(test_loss[idx],4)
+        oneres["test_x"] = round(test_dataset.x[idx].item(),6)
+        oneres["test_y"] = round(test_dataset.y[idx].item(),6)
+        oneres["pred_y"] = round(pred_y[idx],6)
+        oneres["MSELoss"] = round(test_loss[idx],6)
         datas.append(oneres)
 
     wjson = {}
