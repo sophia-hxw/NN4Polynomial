@@ -20,7 +20,7 @@
       "model_type": "FCN",
       "activation": "ReLU",
       "use_checkpoint": 0, 
-      "hidden_dims": [1, 32, 64, 128, 256, 512, 1024, 1]
+      "layer_dims": [1, 32, 64, 128, 256, 512, 1024, 1]
     }, 
     "testing":{
       "num_points": 20,

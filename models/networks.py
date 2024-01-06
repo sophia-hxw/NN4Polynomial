@@ -45,40 +45,6 @@ class CNN(nn.Module):
         # print("conv5 x = ", x.shape)
         return x
 
-# 定义 Dense 网络
-class DenseNet(nn.Module):
-    def __init__(self, activate = 'LeakyReLU'):
-        super(DenseNet, self).__init__()
-        if activate == 'LeakyReLU':
-            self.relu = nn.LeakyReLU()
-        elif activate == 'Tanh':
-            self.relu = nn.Tanh()
-        elif activate == 'Sigmoid':
-            self.relu = nn.Sigmoid()
-        elif activate == 'Mish':
-            self.relu = nn.Mish()
-        else:
-            print("Default activation is ReLU")
-            self.relu = nn.ReLU()
-            
-        self.fc1 = nn.Linear(1, 32)  # 输入维度为1，输出维度为64
-        self.fc2 = nn.Linear(32, 32)  # 输入维度为64，输出维度为64
-        self.fc3 = nn.Linear(32, 64)
-        self.fc4 = nn.Linear(64, 64)
-        self.fc5 = nn.Linear(64, 1)  # 输入维度为64，输出维度为1
-
-    def forward(self, x):
-        x = self.fc1(x)
-        x = self.relu(x)
-        x = self.fc2(x)
-        x = self.relu(x)
-        x = self.fc3(x)
-        x = self.relu(x)
-        x = self.fc4(x)
-        x = self.relu(x)
-        x = self.fc5(x)
-        return x
-
 # 定义简单的Residual Block
 class ResidualBlock(nn.Module):
     def __init__(self, in_channels, out_channels, stride=1):

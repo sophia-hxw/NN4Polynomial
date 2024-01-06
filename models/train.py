@@ -109,10 +109,10 @@ class Trainer:
                 loss.backward()
                 self.optimizer.step()
             
-            if (epoch + 1) % 200 == 0:
+            if (epoch + 1) % 50 == 0:
                 print(f'Epoch [{epoch+1}/{num_epochs}], Loss: {loss.item()}')
                 # print(">>>>>>>>>>>>>>>>>> 200 epoch testing >>>>>>>>>>>>>>>>>>>")
-                # testModel(None, self.test_loader, self.model, device, self.criter, self.model_type)
+                testModel(None, self.test_loader, self.model, device, self.criter, self.model_type)
 
             # 保存checkpoint
             save_checkpoint = os.path.join(self.checkpoint_dir, self.model_type +'_'+str(epoch + 1)+'_'+'checkpoint.pth')

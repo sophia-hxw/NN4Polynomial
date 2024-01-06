@@ -1,7 +1,3 @@
-"""
-activation: 'ReLU', 'LeakyReLU', 'Tanh', 'Sigmoid', 'Mish'
-lossfunction: 'MSE', 'CrossEntropy', 'L1'
-"""
 from torch.utils.data import DataLoader
 from utils.dataset import CustomDataset
 from utils.visualize import vis_table, save_json, get_params
@@ -30,7 +26,7 @@ model = FCNModel(mdlparams['layer_dims'], mdlparams['activation'])
 
 # ****************************** TRAIN ****************************************
 file_name = getSaveFileName(mdlparams['model_type'], traparams['res_dir'])
-trainer = Trainer(model, train_loader, test_loader, traparams['learning_rate'], traparams['criter'], traparams['res_dir']), mdlparams['model_type'])
+trainer = Trainer(model, train_loader, test_loader, traparams['learning_rate'], traparams['criter'], traparams['res_dir'], mdlparams['model_type'])
 pred_y, test_loss = trainer.train(traparams['num_epochs'], traparams['save_interval'], file_name, device )
 
 # ****************************** VISUALIZATION ****************************************

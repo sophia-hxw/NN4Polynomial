@@ -22,7 +22,7 @@
     "learning_rate": 0.001,
     "@@@2.criter":">>>loss计算方法",
     "criter": "MSE",
-    "@@@3.num_epochs": ">>>训练轮次",
+    "@@@3.num_epochs": ">>>训练轮次, 'MSE', 'CrossEntropy', 'L1'.",
     "num_epochs": 3000,
     "@@@4.save_interval": ">>>保存checkpoint的训练轮次数",
     "save_interval": 1000,
@@ -32,7 +32,7 @@
   "model":{
     "@@@1.model_type": ">>>模型类型",
     "model_type": "FCN",
-    "@@@2.activation": ">>>模型使用的激活函数",
+    "@@@2.activation": ">>>模型使用的激活函数,'ReLU', 'LeakyReLU', 'Tanh', 'Sigmoid', 'Mish'.",
     "activation": "ReLU",
     "@@@3.use_checkpoint": ">>>训练时是否保存checkpoint",
     "use_checkpoint": 0, 
