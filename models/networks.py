@@ -154,3 +154,17 @@ class FCNModel(nn.Module):
 
     def forward(self, x):
         return self.fcn(x)
+
+# 定义解法器神经网络模型
+class NeuralNetwork(nn.Module):
+    def __init__(self):
+        super(NeuralNetwork, self).__init__()
+        self.fc1 = nn.Linear(4, 10)
+        self.relu = nn.ReLU()
+        self.fc2 = nn.Linear(10, 4)
+
+    def forward(self, x):
+        x = self.fc1(x)
+        x = self.relu(x)
+        x = self.fc2(x)
+        return x

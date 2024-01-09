@@ -33,16 +33,20 @@ def testModel(file_name = None, test_loader = None, model = None, device = None,
                 labels = labels.unsqueeze(2)
             if device:
                 inputs, labels = inputs.to(device), labels.to(device)
+            # print("shape of inputs", inputs.size())
             outputs = model(inputs)
+            # print("shape of outputs", outputs.size())
+            # print("shape of outputs", outputs.shape)
             test_loss = criterion(outputs, labels)
-            print("******************** TESTING ********************")
-            print("test_x = ", inputs.item())
-            print("labels = ", labels.item())
-            print("prediction = ", outputs.item())
+            # print("******************** TESTING ********************")
+            # print("test_x = ", inputs.item())
+            # print("labels = ", labels.item())
+            # print("prediction = ", outputs.item())
             test_losses.append(test_loss.item())
             pred_y.append(outputs.item())
     
     return pred_y, test_losses
+
 
 
 class Trainer:
@@ -133,9 +137,65 @@ class Trainer:
         pred_y, test_losses = testModel(None, self.test_loader, self.model, device, self.criter, self.model_type)
         return pred_y, test_losses
 
+
 class Tester:
-    def __init__(test_loader = None, file_name = None, model = None):
-        pass
-    
-    def test():
-        pass
+    def __init__(self, model_train = None, model_pth = None, criter = None, device = None):
+        if model_train:
+            self.model = model_train.to(device)
+            print("Testing model U have just trained.")
+        elif model_pth:
+            model = torch.load(model_pth)
+            self.model = model.to(device)
+            print("Testing Exiting model. ")
+        else:
+            raise ValueError("Invalid model parameters. Giving correct 'model_train' or 'model_pth'. ")
+
+        if criter == 'MSE':
+            self.criterion = nn.MSELoss()
+        elif criter == None:
+            print("No criterion will used in this processing. ")
+        else:
+            raise ValueError("Invalid criterion parameters. Giving correct 'criter'. ")
+        
+        self.device = device
+
+    def evaluate_dataset(self, dataloader, model_type):
+        self.model.eval()
+
+        test_losses = []
+        pred_y = []
+
+        with torch.no_grad():
+            for inputs, targets in dataloader:
+                if model_type == 'cnn':
+                    labels = labels.unsqueeze(2)
+                if self.device:
+                    inputs, targets = inputs.to(self.device), targets.to(self.device)
+
+                outputs = self.model(inputs)
+                loss = self.criterion(outputs, targets)
+
+                print("******************** TESTING ********************")
+                print("test_x = ", inputs.item())
+                print("labels = ", labels.item())
+                print("prediction = ", outputs.item())
+                test_losses.append(test_loss.item())
+                pred_y.append(outputs.item())
+
+        return pred_y, test_losses
+
+    def inference_samples(self, samples):
+        self.model.eval()
+        pred_y = []
+
+        with torch.no_grad():
+            for sample in samples:
+                inputs = sample.to(self.device)
+                outputs = self.model(inputs)
+                # print("******************** TESTING ********************")
+                # print("test_x = ", inputs.item())
+                # print("prediction = ", outputs.item())
+
+                pred_y.append(outputs.item())
+
+        return pred_y
