@@ -1,10 +1,3 @@
-"""
-activation: 'ReLU', 'LeakyReLU', 'Tanh', 'Sigmoid', 'Mish'
-lossfunction: 'MSE', 'CrossEntropy', 'L1'
-
-model_type = 'CNN', 'ResNet', 'Dense', 'FCN'
-"""
-
 from torch.utils.data import DataLoader
 from utils.dataset import PolynomialDataset
 from utils.visualize import vis_table, save_json
@@ -15,12 +8,18 @@ from models.train import testModel, saveModel, Trainer
 device = getDevice(model_type = 'CNN')
 print("The device U can Use is: ", device)
 
-# 准备数据
-train_dataset = PolynomialDataset(num_points = 30000, method = 'common', ptimes = 2)
-train_loader = DataLoader(train_dataset, batch_size = 5, shuffle=True)
+dtparams, traparams, mdlparams, tstparams = get_params('./configs/trigo_fcn.json')
 
-# 定义模型
+# ****************************** DATA ****************************************
+train_dataset = CustomDataset(dtparams['num_points'], dtparams['function_type'], dtparams['data_type'], dtparams['tri_function'], dtparams['data_scale'], dtparams['k'], None)
+train_loader = DataLoader(train_dataset, batch_size = dtparams['batch_size'], shuffle = True)
+test_dataset = CustomDataset(tstparams['num_points'], dtparams['function_type'], tstparams['data_type'], dtparams['tri_function'], tstparams['data_scale'], dtparams['k'], tstparams['seed'])
+test_loader = DataLoader(test_dataset, tstparams['batch_size'], shuffle = False)
+
+# ****************************** MODEL ****************************************
 model = PolynomialCNN(activate = 'LeakyReLU').to(device)
+model = CNN(mdlparams['layer_dims'], mdlparams['activation'])
+
 
 
 # 创建Trainer实例

@@ -23,7 +23,8 @@ def prepare_fig_data(test_dataset, pred_y):
 def test_model_file(model_name, pt_num):
     # 参数
     file_name = './res_polynomial/fcn/'+ model_name + '.pth'
-    device = getDevice()
+    # device = getDevice()
+    device = 'cpu'
     print("The device U can Use is: ", device)
 
     # 数据
@@ -67,5 +68,5 @@ def test_model_file(model_name, pt_num):
 
 if __name__ == "__main__":
     model_name = 'FCN_2024-01-09-01-04'
-    pt_num = 1000
+    pt_num = 50
     test_model_file(model_name, pt_num)   

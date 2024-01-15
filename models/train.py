@@ -9,7 +9,7 @@ from utils.util import find_max_epoch_file
 
 def testModel(file_name = None, test_loader = None, model = None, device = None, criter = 'MSE', model_type = None):
     if file_name:
-        model = torch.load(file_name)
+        model = torch.load(file_name, map_location=torch.device(device))
         print("Testing Exiting model. ")
     else:
         print("Testing model U have just trained.")
@@ -144,7 +144,7 @@ class Tester:
             self.model = model_train.to(device)
             print("Testing model U have just trained.")
         elif model_pth:
-            model = torch.load(model_pth)
+            model = torch.load(model_pth, map_location=torch.device(device))
             self.model = model.to(device)
             print("Testing Exiting model. ")
         else:
