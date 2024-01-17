@@ -5,10 +5,11 @@ from utils.util import getSaveFileName, getDevice
 from models.networks import FCNModel
 from models.train import testModel, Trainer
 
+# ****************************** PARAMETERS ****************************************
+dtparams, traparams, mdlparams, tstparams = get_params('./configs/poly_fcn.json')
+
 device = getDevice(mdlparams['model_type'])
 print("The device U can Use is: ", device)
-
-dtparams, traparams, mdlparams, tstparams = get_params('./configs/poly_fcn.json')
 
 # ****************************** DATA ****************************************
 train_dataset = CustomDataset(dtparams['num_points'], dtparams['function_type'], dtparams['data_type'], dtparams['tri_function'], dtparams['data_scale'], dtparams['k'], None)
